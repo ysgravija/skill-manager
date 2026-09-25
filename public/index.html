@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skill Manager</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="titlebar">
+      <div class="titlebar-inner">
+        <button class="brand" type="button" data-view="library" aria-label="Open skill library">
+          <span class="brand-mark" aria-hidden="true">S</span><span>Skill Manager</span>
+        </button>
+        <nav class="view-tabs" aria-label="Library views">
+          <button class="view-tab active" type="button" data-view="library">Library</button>
+          <button class="view-tab" type="button" data-view="favorites">Favorites</button>
+          <button class="view-tab" type="button" data-view="activity">Activity</button>
+        </nav>
+        <div class="titlebar-actions">
+          <div class="theme-switch" role="group" aria-label="Appearance">
+            <button class="theme-option" type="button" data-theme-choice="light" aria-pressed="true">Light</button>
+            <button class="theme-option" type="button" data-theme-choice="black" aria-pressed="false">Black</button>
+          </div>
+          <button class="button primary" id="create-button" type="button"><span aria-hidden="true">＋</span> New skill</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-intro" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">YOUR LOCAL WORKSPACE</p>
+          <h1 id="page-title">Skill library<span class="heading-dot">.</span></h1>
+          <p>One place to browse, organize, and track the skills on this Mac.</p>
+        </div>
+        <button class="button secondary" id="rescan-button" type="button"><span aria-hidden="true">↻</span> Rescan library</button>
+      </section>
+
+      <div class="workspace">
+        <section class="toolbar" id="library-toolbar" aria-label="Filter skills">
+          <label class="search" for="search">
+            <span class="sr-only">Search skills</span><span aria-hidden="true">⌕</span>
+            <input id="search" type="search" placeholder="Search skills, descriptions, or sources" autocomplete="off">
+          </label>
+          <div class="source-filters" id="source-filters" aria-label="Filter by source"></div>
+          <label class="status-control">
+            <span class="sr-only">Filter by status</span>
+            <select id="status-filter">
+              <option value="active">Active</option>
+              <option value="archived">Archived</option>
+              <option value="">Any status</option>
+            </select>
+          </label>
+        </section>
+
+        <section class="summary-strip" aria-label="Library summary">
+          <span class="summary-leading"><strong id="matching-count">0</strong> showing</span>
+          <span><strong id="stat-skills">0</strong> skills</span>
+          <span><strong id="stat-agents">0</strong> sources</span>
+          <span><strong id="stat-favorites">0</strong> favorites</span>
+          <span><strong id="stat-uses">0</strong> recorded uses</span>
+        </section>
+
+        <section class="content-panel" id="content" aria-live="polite">
+          <div class="empty-state">
+            <span class="spinner" aria-hidden="true"></span>
+            <h2>Scanning skill folders</h2>
+            <p>Reading the skill files available on this Mac.</p>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Skill details" aria-hidden="true" inert>
+    <button class="icon-button drawer-close" id="drawer-close" type="button" aria-label="Close skill details">×</button>
+    <div id="drawer-content"></div>
+  </aside>
+
+  <dialog id="create-dialog" aria-labelledby="create-title">
+    <form id="create-form">
+      <div class="modal-heading">
+        <div><p class="eyebrow">App-managed skill</p><h2 id="create-title">Create a new skill</h2></div>
+        <button class="icon-button" type="button" id="modal-close" aria-label="Close create skill dialog">×</button>
+      </div>
+      <p class="form-note">This creates a skill in Skill Manager. It does not install the skill into an agent.</p>
+      <label>Name<input name="name" maxlength="100" required placeholder="Release notes editor"></label>
+      <label>Folder slug<input name="slug" maxlength="64" pattern="[a-z0-9]+(-[a-z0-9]+)*" required placeholder="release-notes-editor"></label>
+      <label>Description<textarea name="description" maxlength="500" rows="2" placeholder="Turns raw changes into concise release notes."></textarea></label>
+      <label>Instructions<textarea name="instructions" maxlength="50000" rows="8" required placeholder="# Instructions&#10;&#10;Describe when and how the agent should use this skill."></textarea></label>
+      <p class="form-error" id="form-error" role="alert"></p>
+      <div class="modal-actions">
+        <button type="button" class="button secondary" id="modal-cancel">Cancel</button>
+        <button type="submit" class="button primary">Create skill</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
