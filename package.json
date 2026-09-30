@@ -3,9 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "productName": "Skill Manager",
+  "main": "electron/main.mjs",
   "scripts": {
     "start": "node src/server.mjs",
+    "desktop": "electron .",
+    "package:mac": "sh scripts/package-mac.sh",
     "test": "node --test"
+  },
+  "config": {
+    "forge": "forge.config.cjs"
   },
   "engines": {
     "node": ">=22"
@@ -13,5 +20,9 @@
   "dependencies": {
     "dompurify": "^3.4.16",
     "marked": "^18.0.14"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.11.2",
+    "electron": "^44.4.5"
   }
 }

@@ -24,6 +24,6 @@ Select **Log use** when you want to record that you used the skill. The **Activi
 2. Enter a name, a lowercase folder slug, an optional description, and instructions.
 3. Select **Create skill**.
 
-Skill Manager writes the new `SKILL.md` under its data directory. It does not install the skill into another agent. See [Run Skill Manager](run.md) for the data directory used by each build.
+Skill Manager writes the new `SKILL.md` under its data directory. It does not install the skill into another agent. See [Run Skill Manager](run.md) for each version's data directory.
 
 If you change a skill file outside the app, select **Rescan library** to refresh the list and file tree.

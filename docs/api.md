@@ -1,6 +1,6 @@
 # Local HTTP API
 
-The Node server binds to `127.0.0.1` on port `4317` unless `PORT` sets another port.
+The Node server binds to `127.0.0.1`. The browser version uses port `4317` unless `PORT` sets another port; the macOS app chooses an available port when it starts.
 
 All API responses use JSON. Write requests require `Content-Type: application/json` and accept bodies up to 64 KiB. The server rejects requests with a non-local `Host`, a foreign `Origin`, or a cross-site API request.
 

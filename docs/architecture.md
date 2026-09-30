@@ -16,11 +16,11 @@ The app stores favorite flags, notes, and active or archived status in `metadata
 
 `SkillCatalog` serializes writes through `writeQueue`. Each write creates a temporary JSON file, syncs it, and renames it over the previous file. A restart loads the saved metadata and events, then rescans the skill roots.
 
-The app stores tracking data in the repository's `data/` directory by default. See [Run Skill Manager](run.md) to choose another directory.
+The browser version stores tracking data in the repository's `data/` directory by default. The macOS app uses its Application Support directory. See [Run Skill Manager](run.md) for both locations.
 
 ## HTTP and reader
 
-`src/server.mjs` owns the local HTTP API and serves the browser assets. It validates write bodies and restricts requests to the local origin. The server uses port `4317` by default. See the [Local HTTP API](api.md) for routes and limits.
+`src/server.mjs` owns the local HTTP API and serves the browser assets. It validates write bodies and restricts requests to the local origin. The browser version uses port `4317` by default; the macOS app chooses an available port. See the [Local HTTP API](api.md) for routes and limits.
 
 `public/app.js` renders the library and opens the skill reader. The reader loads a skill's file tree from its detail response, then requests supporting files through the indexed-file endpoint. `public/markdown.js` uses Marked for Markdown and DOMPurify to sanitize the resulting HTML. The reader offers formatted preview and raw source. It does not run code from skill files or display embedded images.
 
